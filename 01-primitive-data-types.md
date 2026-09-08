@@ -165,3 +165,35 @@ const booleanTypeVariable2 = false;
 - `typeof booleanTypeVariable === "boolean"`.
 
 ----------------------------------------------------------------------- 
+# 4. Undefined
+
+## Explanation
+Automatically assigned to variables that have just been declared. 
+Also automatically assigned to arguments for which there are no actual arguments.
+
+## Example
+```js
+let x; // declared. not initialized; undefined is assigned to it.
+const undefinedTypeVariable = undefined;
+```
+
+## Important Key Points
+
+- it means "value missing"
+- used in absence of assignment
+- it is a type and value at the same time. 
+- a fucntion with no explicit return, returns undefined
+- accessing a missing object property return undefined.
+- if there is a missing function argument, the function returns undefined.
+- if the one tries to access out-of-bounds array index, it returns undefined.
+- undefined is one of the falsy values in Js.
+- Boolean(undefined); // false
+- undefined is assigned automatically, not by the developer. 
+- the type of undefined is undefined.
+undefined == null → true
+undefined === null → false
+
+-------------------------------------------------------------------------
+
+
+
