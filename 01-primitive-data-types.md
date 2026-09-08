@@ -114,4 +114,16 @@ const bigIntTypeVariable = 9007199254740993n;
 - Cant be mixed with Number in arithmetic operations. 
  10n + 5;      // ❌ TypeError: Cannot mix BigInt and other types
  - Bigint does not accept fractional or decimal values.
- 
+
+-----------------------------------------------------------------------------
+# 4. Boolean
+
+## Explanation
+
+## Example
+```js
+const  = ;
+```
+
+## Important Key Points
+- 
