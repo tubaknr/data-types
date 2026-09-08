@@ -134,7 +134,7 @@ const bigIntTypeVariable = 9007199254740993n;
 # 4. Boolean
 
 ## Explanation
-A logic data type that can have only the values true or false. 
+A logical data type that can have only one of two values: `true` or `false`.
 
 ## Example
 ```js
@@ -143,13 +143,25 @@ const booleanTypeVariable2 = false;
 ```
 
 ## Important Key Points
-- used frequently in if statements (conditional logic) and loops (flow control). 
-- if (boolean conditinal)
-// code to execute 
-- it needs onyl 1 bit to represernt 2 states. 
-- js does not guarantee a specififc meemory size for it, it is lefto to V8 engine internal implementation.
-- tehre are values called truthy and falsy values; they behave like boolean values but they are actaully not booelan. For example 0 is falsy but it is not boolean, it is number. "" empty string is falsy and it is string, not boolean. 
-- Falsy values in Js are: false, 0, -0, On, "", null, undefined, NaN
-- examples for truthy values: [], {}, "0", even if they seems to be empty, they are still truthy values. 
+
+- Used frequently in **conditional logic** (`if` statements) and **flow control** (loops):
+```js
+  if (booleanTypeVariable) {
+    // code to execute
+  }
+```
+- Conceptually needs only **1 bit** to represent 2 states.
+- JavaScript **does not guarantee a specific memory size** for it — this is left to the engine's internal implementation (e.g. the V8 engine).
+- There are values called **truthy** and **falsy** values — they *behave* like boolean values in a conditional context, but they are **not actually of type `Boolean`**.
+  - Example: `0` is falsy, but its type is `"number"`, not `"boolean"`.
+  - Example: `""` (empty string) is falsy, but its type is `"string"`, not `"boolean"`.
+- **Falsy values** in JavaScript (exactly 8 of them): false, 0, -0, 0n, "", null, undefined, NaN
+- **Truthy value examples:** `[]`, `{}`, `"0"` — even though these may *seem* empty or "zero-like," they are still truthy:
+```js
+  Boolean([]);  // true
+  Boolean({});  // true
+  Boolean("0"); // true
+```
+- `typeof booleanTypeVariable === "boolean"`.
 
 ----------------------------------------------------------------------- 
