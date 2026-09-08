@@ -92,3 +92,26 @@ const numberTypeVariable = 465;
   Number.isInteger(5.5); // false
 ```
 -----------------------------------------------------------------------------
+# 3. Bigint
+
+## Explanation
+Numeric data type that can represent integers in the arbitrary precision format.
+Numbers larger than the Number type, can safely handle with Bigint. 
+
+## Example
+```js
+const bigIntTypeVariable = 9007199254740993n;
+```
+
+## Important Key Points
+- takes "n" in the last.
+- for very big numbers. 
+- introduced in ES2020.
+- can be created with BigInt() function also.
+- Bigint does not have a fixed bit size! Its size grows as it goes dynamically. 
+- There is no upper precision limit. 
+- Solves the precision problem that came with Number.
+- Cant be mixed with Number in arithmetic operations. 
+ 10n + 5;      // ❌ TypeError: Cannot mix BigInt and other types
+ - Bigint does not accept fractional or decimal values.
+ 
