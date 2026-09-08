@@ -194,6 +194,34 @@ undefined == null → true
 undefined === null → false
 
 -------------------------------------------------------------------------
+# 5. Symbol
+
+## Explanation
+
+
+## Example
+```js
+const  = ;
+```
+
+## Important Key Points
+
+- 
+
+-------------------------------------------------------------------------
+# 6. Null
+
+## Explanation
+
+
+## Example
+```js
+const  = ;
+```
+
+## Important Key Points
+
+- 
 
 
 
