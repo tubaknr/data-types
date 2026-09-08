@@ -8,17 +8,87 @@
 7. null
 
 ------
-## 1. String
-### Explanation
-A sequence of characters used to represent text. 
+# 1. String
 
-### Example
-(```const stringTypeVariable = "This is sequence of characters."```)
+## Explanation
+A sequence of characters used to represent text.
 
-### Important Key Points
-- uses UTF-16
-- 2 byte = 16 bit.
-- emojis are 4 bytes. 
-- ```stringTypeVariable.length``` = # of UTF-16 code units = # of characters
-- the space it occupied in memory = # of characters * 2
-- 1 code unit = 16 bit = 2 byte.
+## Example
+```js
+const stringTypeVariable = "This is a sequence of characters.";
+```
+
+## Important Key Points
+
+- JavaScript strings use the **UTF-16** encoding internally.
+- Each **code unit** in UTF-16 is **16 bit = 2 byte**.
+
+| Unit | Size |
+|---|---|
+| 1 code unit | 16 bit = 2 byte |
+| Most common characters (BMP) | 1 code unit = 2 byte |
+| Emojis / rare characters (outside BMP) | 2 code units (surrogate pair) = 4 byte |
+
+- `stringTypeVariable.length` returns the **number of UTF-16 code units** — **not** necessarily the number of visible characters.
+  - For most everyday characters (letters, digits, punctuation), 1 code unit = 1 visible character, so `.length` matches what you'd intuitively count.
+  - For characters outside the Basic Multilingual Plane (BMP) — such as many emojis — 1 visible character is represented by **2 code units** (a *surrogate pair*), so `.length` reports `2` for what looks like a single emoji:
+```js
+    "😀".length; // 2  (not 1!)
+```
+
+- **Approximate memory occupied** by a string: memory ≈ string.length * 2 byte
+
+
+----------------------------------------------
+# 2. Number
+
+## Explanation
+Numeric data type in the **double precision 64-bit floating point format**.
+
+**Generic Format:** IEEE 754 Double Precision
+
+## Example
+```js
+const numberTypeVariable = 465;
+```
+
+## Important Key Points
+
+- Total size: **64 bit = 8 byte**
+- Bit breakdown: `64 bit = sign (1 bit) + exponent (11 bit) + fraction (52 bit)`
+
+| Part | Bits | Purpose |
+|---|---|---|
+| Sign | 1 | Positive / negative |
+| Exponent | 11 | Magnitude / scale of the number |
+| Fraction (Mantissa) | 52 | Precision (the actual significant digits) |
+
+- There are **no separate number types** like in C/C++ (`int`, `float`, `double`, `long`, etc.) — JS has only one `Number` type.
+  - ✅ **Advantage:** can represent both very large and very small numbers using the same type.
+  - ⚠️ **Drawback:** limited precision.
+
+- Because of this precision limit:
+```js
+  0.1 + 0.2 === 0.3   // false
+  0.1 + 0.2           // 0.30000000000000004
+```
+
+- To solve the precision/large-integer problem, JS introduced **`BigInt`** (ES2020).
+```js
+  const big = 9007199254740993n; // note the trailing "n"
+  typeof big; // "bigint"
+```
+
+- **Safe max integer:** `2^53 - 1` → `Number.MAX_SAFE_INTEGER`
+
+- **`NaN`**
+  - `typeof NaN === "number"`
+  - Means an **"invalid mathematical calculation"** result.
+  - Special quirk: `NaN === NaN` → `false`
+
+- Integer check example:
+```js
+  Number.isInteger(5.0); // true
+  Number.isInteger(5.5); // false
+```
+-----------------------------------------------------------------------------
