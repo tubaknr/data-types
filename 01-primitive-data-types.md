@@ -197,31 +197,50 @@ undefined === null → false
 # 5. Symbol
 
 ## Explanation
-
+This is a built in object whose contructor returns a symbol primitive. It is guaranteeded to be unique. 
 
 ## Example
 ```js
-const  = ;
+const  id = Symbol("id");
 ```
 
 ## Important Key Points
 
-- 
+- It enables the form of weak encapsulation.
+- enables a weak form of information hiding.
+it is the only primitive data type that has reference identitiy. 
+- Symbols are always unique. even with the same descriptions.
+- They can be used as a property key in objects.
+- the object properties are not shown with Object.keys or for in loops.
+Çakışmaları Önleme (Name Collisions): Üçüncü taraf kütüphanelerden gelen veya ortak kullanılan nesnelere, var olan özelliklerin üzerine yazma (override) riski olmadan yeni özellikler eklemek için.
+
+Gizli Özellikler: Dışarıdan yapılan genel döngülerin (for...in, JSON.stringify) erişmesini istemediğiniz nesne durumlarını saklamak için.
+
+Well-Known Symbols (Sistem Symbol'leri): JavaScript'in kendi iç davranışlarını değiştirmek için (örneğin bir nesneyi Symbol.iterator kullanarak döngüye girmeye uygun hale getirmek).
 
 -------------------------------------------------------------------------
 # 6. Null
 
 ## Explanation
-
+IT means nonexistent or invalid object or address. This is done by the developer. Not auto by js. 
 
 ## Example
 ```js
-const  = ;
+let user = null;
 ```
 
 ## Important Key Points
 
-- 
+- typeof null = object. however this is nonfixable bug. 
+- it is done by the developer, not by js like in undefined.
+- means the developer has not give a value to the variable.
+- it is a falsy value. Boolean(null) = false.
+- ?. is used when the one tries to reach a property of a null object. This is called optional chaining. 
+const name = user?.profile?.name;
 
+- ?? is called nullish coalescing. It checks the left hand side, if it is null or undefined, makes the right hand side valid.
+const activeUser = user ?? "Misafir Kullanıcı";
 
+console.log(null == undefined);  // true  (Gevşek eşitlik - değer kontrolü)
+console.log(null === undefined); // false (Sıkı eşitlik - tip kontrolü)
 
