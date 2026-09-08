@@ -92,11 +92,12 @@ const numberTypeVariable = 465;
   Number.isInteger(5.5); // false
 ```
 -----------------------------------------------------------------------------
-# 3. Bigint
+# 3. BigInt
 
 ## Explanation
-Numeric data type that can represent integers in the arbitrary precision format.
-Numbers larger than the Number type, can safely handle with Bigint. 
+A numeric data type that can represent **integers in arbitrary precision format**.
+
+Numbers larger than the `Number` type can safely handle are handled reliably with `BigInt`.
 
 ## Example
 ```js
@@ -104,26 +105,51 @@ const bigIntTypeVariable = 9007199254740993n;
 ```
 
 ## Important Key Points
-- takes "n" in the last.
-- for very big numbers. 
-- introduced in ES2020.
-- can be created with BigInt() function also.
-- Bigint does not have a fixed bit size! Its size grows as it goes dynamically. 
-- There is no upper precision limit. 
-- Solves the precision problem that came with Number.
-- Cant be mixed with Number in arithmetic operations. 
- 10n + 5;      // ❌ TypeError: Cannot mix BigInt and other types
- - Bigint does not accept fractional or decimal values.
+
+- Takes an **`n`** suffix at the end of the literal.
+- Used for representing **very large integers**.
+- Introduced in **ES2020**.
+- Can also be created using the **`BigInt()`** function:
+```js
+  const bigIntTypeVariable = BigInt(9007199254740993);
+```
+- `BigInt` **does not have a fixed bit size** — its size in memory **grows dynamically** as the number gets larger.
+- There is **no upper precision limit**.
+- Solves the precision problem that comes with `Number`:
+```js
+  9007199254740992 === 9007199254740993;   // true  (Number precision loss!)
+  9007199254740992n === 9007199254740993n; // false (BigInt is exact)
+```
+- **Cannot be mixed with `Number`** in arithmetic operations:
+```js
+  10n + 5;  // ❌ TypeError: Cannot mix BigInt and other types, use explicit conversions
+  10n + 5n; // ✅ 15n
+```
+- Does **not accept fractional or decimal values** — integers only:
+```js
+  BigInt(5.5); // ❌ RangeError: The number 5.5 cannot be converted to a BigInt
+```
 
 -----------------------------------------------------------------------------
 # 4. Boolean
 
 ## Explanation
+A logic data type that can have only the values true or false. 
 
 ## Example
 ```js
-const  = ;
+const booleanTypeVariable = true;
+const booleanTypeVariable2 = false;
 ```
 
 ## Important Key Points
-- 
+- used frequently in if statements (conditional logic) and loops (flow control). 
+- if (boolean conditinal)
+// code to execute 
+- it needs onyl 1 bit to represernt 2 states. 
+- js does not guarantee a specififc meemory size for it, it is lefto to V8 engine internal implementation.
+- tehre are values called truthy and falsy values; they behave like boolean values but they are actaully not booelan. For example 0 is falsy but it is not boolean, it is number. "" empty string is falsy and it is string, not boolean. 
+- Falsy values in Js are: false, 0, -0, On, "", null, undefined, NaN
+- examples for truthy values: [], {}, "0", even if they seems to be empty, they are still truthy values. 
+
+----------------------------------------------------------------------- 
