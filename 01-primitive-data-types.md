@@ -165,64 +165,88 @@ const booleanTypeVariable2 = false;
 - `typeof booleanTypeVariable === "boolean"`.
 
 ----------------------------------------------------------------------- 
-# 4. Undefined
+# 5. Undefined
 
 ## Explanation
-Automatically assigned to variables that have just been declared. 
-Also automatically assigned to arguments for which there are no actual arguments.
+Automatically assigned to variables that have just been declared but not yet initialized.
+Also automatically assigned to function arguments for which no actual argument was provided.
 
 ## Example
 ```js
-let x; // declared. not initialized; undefined is assigned to it.
+let x; // declared, not initialized — undefined is assigned to it automatically
 const undefinedTypeVariable = undefined;
 ```
 
 ## Important Key Points
 
-- it means "value missing"
-- used in absence of assignment
-- it is a type and value at the same time. 
-- a fucntion with no explicit return, returns undefined
-- accessing a missing object property return undefined.
-- if there is a missing function argument, the function returns undefined.
-- if the one tries to access out-of-bounds array index, it returns undefined.
-- undefined is one of the falsy values in Js.
-- Boolean(undefined); // false
-- undefined is assigned automatically, not by the developer. 
-- the type of undefined is undefined.
-undefined == null → true
-undefined === null → false
+- Means **"value missing"**.
+- Represents the **absence of assignment**.
+- It is a **type and a value at the same time**.
+- A function with **no explicit `return`** returns `undefined`.
+- Accessing a **missing object property** returns `undefined`.
+- If a function is called with a **missing argument**, that parameter is `undefined`.
+- Accessing an **out-of-bounds array index** returns `undefined`.
+- `undefined` is one of the **falsy values** in JavaScript:
+```js
+  Boolean(undefined); // false
+```
+- `undefined` is assigned **automatically by JavaScript**, not deliberately by the developer (unlike `null`).
+- `typeof undefined === "undefined"`.
+- **`undefined` vs `null` comparison:**
+```js
+  undefined == null;  // true  (loose equality — value comparison, ignores type)
+  undefined === null; // false (strict equality — checks type as well)
+```
 
 -------------------------------------------------------------------------
-# 5. Symbol
+# 6. Symbol
 
 ## Explanation
-This is a built in object whose contructor returns a symbol primitive. It is guaranteeded to be unique. 
+A built-in primitive type whose constructor returns a **unique, immutable value** — a `Symbol`. It is guaranteed to be unique, even if two symbols are created with the exact same description.
 
 ## Example
 ```js
-const  id = Symbol("id");
+const id = Symbol("id");
 ```
 
 ## Important Key Points
 
-- It enables the form of weak encapsulation.
-- enables a weak form of information hiding.
-it is the only primitive data type that has reference identitiy. 
-- Symbols are always unique. even with the same descriptions.
-- They can be used as a property key in objects.
-- the object properties are not shown with Object.keys or for in loops.
-Çakışmaları Önleme (Name Collisions): Üçüncü taraf kütüphanelerden gelen veya ortak kullanılan nesnelere, var olan özelliklerin üzerine yazma (override) riski olmadan yeni özellikler eklemek için.
+- Enables a **weak form of encapsulation / information hiding** in objects.
+- It is the **only primitive data type with reference identity** — every `Symbol` value is distinct from every other, even when created identically:
+```js
+  Symbol("id") === Symbol("id"); // false
+```
+- Symbols are **always unique**, regardless of having the same description string.
+- Can be used as **object property keys**:
+```js
+  const obj = { [id]: 123 };
+```
+- Symbol-keyed properties are **not enumerated** by common iteration methods — they are excluded from:
+  - `Object.keys()`
+  - `for...in` loops
+  - `JSON.stringify()`
 
-Gizli Özellikler: Dışarıdan yapılan genel döngülerin (for...in, JSON.stringify) erişmesini istemediğiniz nesne durumlarını saklamak için.
+### Common Use Cases
 
-Well-Known Symbols (Sistem Symbol'leri): JavaScript'in kendi iç davranışlarını değiştirmek için (örneğin bir nesneyi Symbol.iterator kullanarak döngüye girmeye uygun hale getirmek).
-
+- **Avoiding name collisions:** Adding new properties to objects shared across third-party libraries or common codebases without risking accidentally overwriting an existing property.
+- **Hiding internal state:** Storing object state that shouldn't be picked up by generic enumeration mechanisms (`for...in`, `JSON.stringify`, etc.).
+- **Well-known symbols (system symbols):** Used internally by JavaScript to customize an object's built-in behavior — for example, `Symbol.iterator` makes an object iterable in a `for...of` loop:
+```js
+  const iterableObj = {
+    [Symbol.iterator]() {
+      let i = 0;
+      return {
+        next: () => (i < 3 ? { value: i++, done: false } : { value: undefined, done: true })
+      };
+    }
+  };
+  [...iterableObj]; // [0, 1, 2]
+```
 -------------------------------------------------------------------------
-# 6. Null
+# 7. Null
 
 ## Explanation
-IT means nonexistent or invalid object or address. This is done by the developer. Not auto by js. 
+Represents an **intentional absence of any object value** — a nonexistent or invalid reference. Unlike `undefined`, this is a value that must be **explicitly assigned by the developer**, not something JavaScript sets automatically.
 
 ## Example
 ```js
@@ -231,16 +255,23 @@ let user = null;
 
 ## Important Key Points
 
-- typeof null = object. however this is nonfixable bug. 
-- it is done by the developer, not by js like in undefined.
-- means the developer has not give a value to the variable.
-- it is a falsy value. Boolean(null) = false.
-- ?. is used when the one tries to reach a property of a null object. This is called optional chaining. 
-const name = user?.profile?.name;
-
-- ?? is called nullish coalescing. It checks the left hand side, if it is null or undefined, makes the right hand side valid.
-const activeUser = user ?? "Misafir Kullanıcı";
-
-console.log(null == undefined);  // true  (Gevşek eşitlik - değer kontrolü)
-console.log(null === undefined); // false (Sıkı eşitlik - tip kontrolü)
-
+- `typeof null === "object"` — this is a well-known **historical bug in JavaScript** that cannot be fixed now without breaking backward compatibility.
+- Set **explicitly by the developer**, unlike `undefined`, which JavaScript assigns automatically.
+- Signals that "the developer has deliberately given this variable no value" (as opposed to `undefined`, which means "no value has been given yet").
+- It is one of the **8 falsy values**:
+```js
+  Boolean(null); // false
+```
+- **Optional chaining (`?.`)** is used to safely access a property when the object might be `null` (or `undefined`), avoiding a `TypeError`:
+```js
+  const name = user?.profile?.name; // returns undefined instead of throwing, if user or profile is null/undefined
+```
+- **Nullish coalescing (`??`)** checks whether the left-hand side is `null` or `undefined`, and if so, falls back to the right-hand side:
+```js
+  const activeUser = user ?? "Guest User";
+```
+- **`null` vs `undefined` comparison:**
+```js
+  null == undefined;  // true  (loose equality — value comparison, ignores type)
+  null === undefined; // false (strict equality — checks type as well)
+```
