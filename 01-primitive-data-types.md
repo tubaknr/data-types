@@ -1,12 +1,12 @@
 # Primitive Data Types
 
-1. string
-2. number
-3. bigint
-4. boolean
-5. undefined
-6. symbol
-7. null
+1. [string](#1-string)
+2. [number](#2-number)
+3. [bigint](#3-bigint)
+4. [boolean](#4-boolean)
+5. [undefined](#5-undefined)
+6. [symbol](#6-symbol)
+7. [null](#7-null)
 
 ---
 
