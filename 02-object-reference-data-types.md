@@ -12,9 +12,9 @@ So, when a variable is created to store a reference type, it does not store the 
 | Copied by          | Value (independent copy) | Reference (shared pointer)                   |
 | Comparison         | Compares values          | Compares memory references, not content      |
 
-1. Objects
-2. Arrays
-3. Functions
+1. [objects](#1-objects)
+2. [arrays](#2-arrays)
+3. [functions](#3-functions)
 
 ---
 
