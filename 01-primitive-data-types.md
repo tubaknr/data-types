@@ -6,7 +6,7 @@
 4. boolean
 5. undefined
 6. symbol
-7.
+7. null
 
 ---
 
