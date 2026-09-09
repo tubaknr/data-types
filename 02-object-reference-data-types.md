@@ -6,11 +6,11 @@ Unlike primitive types, reference types are **not stored directly in the variabl
 
 So, when a variable is created to store a reference type, it does not store the object itself — it stores a **reference** to it.
 
-| | Primitive Types | Reference Types |
-|---|---|---|
-| Stored in variable | The actual value | A reference (pointer) to the memory location |
-| Copied by | Value (independent copy) | Reference (shared pointer) |
-| Comparison | Compares values | Compares memory references, not content |
+|                    | Primitive Types          | Reference Types                              |
+| ------------------ | ------------------------ | -------------------------------------------- |
+| Stored in variable | The actual value         | A reference (pointer) to the memory location |
+| Copied by          | Value (independent copy) | Reference (shared pointer)                   |
+| Comparison         | Compares values          | Compares memory references, not content      |
 
 1. Objects
 2. Arrays
@@ -21,14 +21,16 @@ So, when a variable is created to store a reference type, it does not store the 
 # 1. Objects
 
 ## Explanation
+
 A collection of **key-value pairs**, used to represent structured, named data. The most fundamental reference type in JavaScript — arrays and functions are, in fact, specialized kinds of objects under the hood.
 
 ## Example
+
 ```js
 let objectVariableType = {
   name: "Ali",
   age: 28,
-  city: "New York"
+  city: "New York",
 };
 ```
 
@@ -39,16 +41,19 @@ let objectVariableType = {
   - **Dot notation:** `objectVariableType.name`
   - **Bracket notation:** `objectVariableType["name"]` (required when the key is dynamic or not a valid identifier)
 - Objects are **copied by reference**, not by value:
+
 ```js
-  let obj1 = { x: 1 };
-  let obj2 = obj1;   // obj2 points to the SAME object as obj1
-  obj2.x = 99;
-  console.log(obj1.x); // 99 — changed through obj2, but visible on obj1 too!
+let obj1 = { x: 1 };
+let obj2 = obj1; // obj2 points to the SAME object as obj1
+obj2.x = 99;
+console.log(obj1.x); // 99 — changed through obj2, but visible on obj1 too! NOT COPIED!
 ```
-- Changes made through one reference are **immediately visible** through any other variable pointing to the same object.
+
+- Changes made through one reference are **immediately visible** through any other variable pointing to the same object!
 - When two variables point to the same reference, modifying the object through **either one** affects both.
 - `typeof objectVariableType === "object"`.
-- Equality checks compare **reference**, not content:
+- Equality checks compare **reference, not content!**:
+
 ```js
   { a: 1 } === { a: 1 }; // false — different memory references, even with identical content
 ```
@@ -58,9 +63,11 @@ let objectVariableType = {
 # 2. Arrays
 
 ## Explanation
+
 A special type of object that enables storing **multiple, ordered values** in a single variable.
 
 ## Example
+
 ```js
 let arrayTypeVariable = [1, 2, 3, 4, 5, 6];
 ```
@@ -79,9 +86,11 @@ let arrayTypeVariable = [1, 2, 3, 4, 5, 6];
 # 3. Functions
 
 ## Explanation
+
 A **reusable, callable block of code** designed to perform a task or compute and return a value. In JavaScript, functions are also treated as **first-class objects** — they can be stored, passed around, and manipulated like any other value.
 
 ## Example
+
 ```js
 function greet(name) {
   console.log("Hello, ", name);
